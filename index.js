@@ -7,6 +7,7 @@ const authRoute = require("./routes").auth;
 const courseRoute = require("./routes").course;
 const passport = require("passport");
 require("./config/passport")(passport);
+const cors = require("cors");
 
 mongoose
   .connect(process.env.DB_CONNECT)
@@ -20,6 +21,7 @@ mongoose
 // middleware
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use(cors()); // 注意放的位置
 app.use("/api/user", authRoute);
 app.use(
   "/api/courses",
